@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Calender */
+[x-cloak] {
+    display: none;
+}
+
+/* Sweetalert */
+.my-custom-popup-class {
+    border-radius: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    -ms-border-radius: 9px;
+    -o-border-radius: 9px;
+}
+
+/* Scanner */
+.border-corner:before {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top: 5px solid #fff;
+    border-left: 5px solid #fff;
+    border-radius: 12px 0;
+}
+
+.border-corner:after {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-top: 5px solid #fff;
+    border-right: 5px solid #fff;
+    border-radius: 0 12px;
+}
+
+.border-corner span.border_bottom:before {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom: 5px solid #fff;
+    border-left: 5px solid #fff;
+    border-radius: 0 12px;
+}
+
+.border-corner span.border_bottom:after {
+    display: block;
+    content: "";
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-bottom: 5px solid #fff;
+    border-right: 5px solid #fff;
+    border-radius: 12px 0;
+}
+
+.scanner {
+    width: 70%;
+    height: 3px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    animation-name: scan;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+    z-index: 2;
+}
+
+@keyframes scan {
+    0% {
+        top: 50%;
+    }
+    25% {
+        top: 15%;
+    }
+    75% {
+        top: 85%;
+    }
+}
