@@ -2,24 +2,24 @@
 
 @section('container')
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 mt-14">
-        <div class="flex flex-col gap-6 p-10">
+        <div class="flex flex-col gap-3 sm:gap-6 px-4 py-8 md:p-10">
             <div class="bg-white p-8 rounded-xl shadow-xl">
                 <div class="flex relative">
-                    <div class="flex flex-col gap-2">
-                        <h1 class="text-main font-bold text-3xl">
-                            Hallo, {{ auth()->user()->email }}
+                    <div class="flex flex-col gap-1 sm:gap-2">
+                        <h1 class="text-main leading-6 font-bold text-xl sm:text-3xl">
+                            Hallo, <br class="block sm:hidden">{{ auth()->user()->email }}
                         </h1>
                         <div>
-                            <p class="text-gray-900 font-bold">
-                                Siap memuali harimu di PT. Persada Data Multimedia ?
+                            <p class="text-gray-900 text-sm sm:text-base  font-bold">
+                                Siap memuali harimu di PT. Persada<br class="block lg:hidden"> Data Multimedia ?
                             </p>
-                            <p>yuk lihat dan cek beranda mu ...</p>
+                            <p class="text-sm sm:text-base">yuk lihat dan cek beranda mu ...</p>
                         </div>
                     </div>
                     <img class="absolute w-36 -right-12 -bottom-8" src="../img/avatar.png" alt="" />
                 </div>
             </div>
-            <div class="flex flex-col md:flex-row gap-6">
+            <div class="flex flex-col lg:flex-row gap-3 sm:gap-6">
                 <div class="md:p-8 p-5 bg-white rounded-xl shadow-xl flex-1" x-data="app()" x-init="[initDate(), getNoOfDays()]"
                     x-cloak>
                     <div class="px-4 flex items-center justify-between">

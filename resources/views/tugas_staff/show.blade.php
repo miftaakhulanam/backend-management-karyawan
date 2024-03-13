@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <div
             class="flex items-center bg-gradient-to-r from-main to-currentcolor-500 ps-2 p-1 py-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg class="fill-white w-7 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -19,7 +19,7 @@
 
         <section class="flex justify-start items-center">
             <div class="relative">
-                <div class="flex flex-col gap-7 relative justify-center px-5 py-10">
+                <div class="flex flex-col gap-7 relative justify-center px-0 md:px-5 py-5 md:py-10">
                     <div class="flex flex-col gap-4">
                         <h2 class="text-black text-2xl font-bold">Detail Pelanggan</h2>
                         <div class="flex flex-col gap-5">
@@ -65,15 +65,15 @@
                                     <td>: {{ $desa }}</td>
                                 </tr>
                             </table>
-                            <div class="ms-3 flex flex-row gap-3">
+                            <div class="ms-3 flex flex-col md:flex-row gap-3">
                                 <div class="flex flex-col justify-center items-center gap-1">
                                     @if ($task->customer->photo_ktp)
-                                        <img class="w-52 h-40 object-cover cursor-pointer"
+                                        <img class="w-full md:w-52 h-48 md:h-40 object-cover cursor-pointer"
                                             src="{{ asset('storage/' . $task->customer->photo_ktp) }}"
                                             alt="{{ $task->customer->name }}"
                                             onclick="showModal('{{ asset('storage/' . $task->customer->photo_ktp) }}')">
                                     @else
-                                        <div class="flex justify-center items-center w-48 h-48 bg-gray-500">
+                                        <div class="flex justify-center items-center w-full md:w-48 h-48 bg-gray-500">
                                             <p class="text-gray-300 text-sm font-medium">Photo KTP tidak ada</p>
                                         </div>
                                     @endif
@@ -81,12 +81,12 @@
                                 </div>
                                 <div class="flex flex-col justify-center items-center gap-1">
                                     @if ($task->customer->photo_rumah)
-                                        <img class="w-52 h-40 object-cover cursor-pointer"
+                                        <img class="w-full md:w-52 h-48 md:h-40 object-cover cursor-pointer"
                                             src="{{ asset('storage/' . $task->customer->photo_rumah) }}"
                                             alt="{{ $task->customer->name }}"
                                             onclick="showModal('{{ asset('storage/' . $task->customer->photo_rumah) }}')">
                                     @else
-                                        <div class="flex justify-center items-center w-48 h-48 bg-gray-500">
+                                        <div class="flex justify-center items-center w-full md:w-48 h-48 bg-gray-500">
                                             <p class="text-gray-300 text-sm font-medium">Photo Rumah tidak ada</p>
                                         </div>
                                     @endif
@@ -94,14 +94,14 @@
                                 </div>
                                 <!-- The Modal -->
                                 <div id="modal" tabindex="-5"
-                                    class="hidden fixed top-0 left-0 z-50 w-screen h-screen bg-black/70 flex justify-center items-center">
+                                    class="hidden fixed px-3 md:px-0 top-0 left-0 z-50 w-screen h-screen bg-black/70 flex justify-center items-center">
 
                                     <!-- The close button -->
                                     <a class="fixed z-90 top-6 right-8 text-white text-5xl font-bold"
                                         href="javascript:void(0)" onclick="closeModal()">&times;</a>
 
                                     <!-- A big image will be displayed here -->
-                                    <img id="modal-img" class="max-w-[800px] max-h-[600px] object-cover" />
+                                    <img id="modal-img" class="w-full md:max-w-[800px] max-h-[600px] object-cover" />
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2 class="flex bg-gradient-to-r from-main to-currentcolor p-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-7 mx-2" viewBox="0 0 24 24">
                 <rect width="24" height="24" fill="none" />
@@ -12,7 +12,7 @@
         </h2>
 
         <div class="overflow-x-auto max-h-full">
-            <div class="flex justify-between items-center pt-5 pb-5">
+            <div class="flex justify-between items-center py-3 md:py-5">
                 <a href="/tugas/create"
                     class="flex items-center bg-[#69B360] bg-opacity-60 hover:bg-opacity-75 w-21 h-10 px-3 py-2.5 gap-2 rounded-md text-sm font-bold text-white">
                     <svg class="fill-white w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -40,32 +40,33 @@
                         <tr class="text-main font-semibold text-center border-b-2 border-main">
                             <th>No.</th>
                             <th class="px-2 py-3">Teknisi</th>
-                            <th class="px-4 py-3">Aktivitas</th>
-                            <th class="px-4 py-3">Paket</th>
-                            <th class="px-4 py-3">Mulai Pekerjaan</th>
-                            <th class="px-4 py-3">Data Pelanggan</th>
-                            <th class="px-4 py-3">Aksi</th>
+                            <th class="px-5 py-3">Aktivitas</th>
+                            <th class="px-5 py-3">Paket</th>
+                            <th class="px-5 py-3">Mulai Pekerjaan</th>
+                            <th class="px-5 py-3">Data Pelanggan</th>
+                            <th class="px-5 py-3">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="font-normal text-gray-700 text-center">
                         @foreach ($task as $t)
                             <tr class="py-10 bg-gray-100 hover:bg-gray-200 font-medium">
                                 <td class="ps-4">{{ $loop->iteration . '.' }}</td>
-                                <td class="px-4 py-4">{{ $t->user->name }}</td>
-                                <td class="px-4 py-4">{{ $t->activity }}</td>
-                                <td class="px-4 py-4">{{ $t->paket->nama }}</td>
-                                <td class="px-4 py-4">{{ \Carbon\Carbon::parse($t->start_time)->format('H:i | d-m-Y') }}
+                                <td class="px-5 py-4">{{ $t->user->name }}</td>
+                                <td class="px-5 py-4">{{ $t->activity }}</td>
+                                <td class="px-5 py-4">{{ $t->paket->nama }}</td>
+                                <td class="px-5 py-4">{{ \Carbon\Carbon::parse($t->start_time)->format('H:i | d-m-Y') }}
                                 </td>
-                                <td class="px-1 py-4">
+                                <td class="px-5 md:px-1 py-4">
                                     <div class="flex gap-4 justify-center">
                                         <div>
-                                            <svg data-modal-target="modal-rumah" data-modal-toggle="modal-rumah"
+                                            <svg data-modal-target="modal-rumah{{ $t->id }}"
+                                                data-modal-toggle="modal-rumah{{ $t->id }}"
                                                 class="cursor-pointer fill-[#FFD43B] hover:fill-[#c6a52d]"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="23">
                                                 <path
                                                     d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
                                             </svg>
-                                            <div id="modal-rumah" tabindex="-1" aria-hidden="true"
+                                            <div id="modal-rumah{{ $t->id }}" tabindex="-1" aria-hidden="true"
                                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                 <div class="relative p-4 w-full max-w-xl max-h-full">
                                                     <!-- Modal content -->
@@ -78,7 +79,7 @@
                                                             </h3>
                                                             <button type="button"
                                                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                data-modal-hide="modal-rumah">
+                                                                data-modal-hide="modal-rumah{{ $t->id }}">
                                                                 <svg class="w-3 h-3" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 14 14">
@@ -91,12 +92,18 @@
                                                         </div>
                                                         <!-- Modal body -->
                                                         <div class="p-4 md:p-5">
-                                                            @if ($t->customer->photo_rumah)
-                                                                <img src="{{ asset('storage/' . $t->customer->photo_rumah) }}"
-                                                                    class="img-fluid w-full mt-0">
+                                                            @if ($t->customer)
+                                                                @if ($t->customer->photo_rumah)
+                                                                    <img src="{{ asset('storage/' . $t->customer->photo_rumah) }}"
+                                                                        class="img-fluid w-full mt-0">
+                                                                @else
+                                                                    <p class="text-center my-10 font-normal text-gray-600">
+                                                                        File tidak ditemukan.
+                                                                    </p>
+                                                                @endif
                                                             @else
                                                                 <p class="text-center my-10 font-normal text-gray-600">
-                                                                    File tidak ditemukan.
+                                                                    Data pelanggan mungkin sudah dihapus
                                                                 </p>
                                                             @endif
 
@@ -106,13 +113,14 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <svg data-modal-target="modal-ktp" data-modal-toggle="modal-ktp"
+                                            <svg data-modal-target="modal-ktp{{ $t->id }}"
+                                                data-modal-toggle="modal-ktp{{ $t->id }}"
                                                 class="cursor-pointer fill-[#af0808] hover:fill-[#750b0b]"
                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="23">
                                                 <path
                                                     d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm80 256h64c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16H80c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H496c8.8 0 16 7.2 16 16s-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
                                             </svg>
-                                            <div id="modal-ktp" tabindex="-1" aria-hidden="true"
+                                            <div id="modal-ktp{{ $t->id }}" tabindex="-1" aria-hidden="true"
                                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                 <div class="relative p-4 w-full max-w-xl max-h-full">
                                                     <!-- Modal content -->
@@ -125,7 +133,7 @@
                                                             </h3>
                                                             <button type="button"
                                                                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                data-modal-hide="modal-ktp">
+                                                                data-modal-hide="modal-ktp{{ $t->id }}">
                                                                 <svg class="w-3 h-3" aria-hidden="true"
                                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 14 14">
@@ -138,12 +146,18 @@
                                                         </div>
                                                         <!-- Modal body -->
                                                         <div class="p-4 md:p-5">
-                                                            @if ($t->customer->photo_ktp)
-                                                                <img src="{{ asset('storage/' . $t->customer->photo_ktp) }}"
-                                                                    class="img-fluid w-full mt-0">
+                                                            @if ($t->customer)
+                                                                @if ($t->customer->photo_ktp)
+                                                                    <img src="{{ asset('storage/' . $t->customer->photo_ktp) }}"
+                                                                        class="img-fluid w-full mt-0">
+                                                                @else
+                                                                    <p class="text-center my-10 font-normal text-gray-600">
+                                                                        File tidak ditemukan.
+                                                                    </p>
+                                                                @endif
                                                             @else
                                                                 <p class="text-center my-10 font-normal text-gray-600">
-                                                                    File tidak ditemukan.
+                                                                    Data pelanggan mungkin sudah dihapus
                                                                 </p>
                                                             @endif
                                                         </div>
@@ -152,25 +166,114 @@
                                             </div>
                                         </div>
                                         <div>
-                                            @if ($t->customer->koordinat)
-                                                <a
-                                                    href="https://www.google.com/maps/search/?api=1&query={{ $t->customer->koordinat }}">
-                                                    <svg class="cursor-pointer fill-[#08af42] hover:fill-[#0c8436]"
+                                            @if ($t->customer)
+                                                @if ($t->customer->koordinat)
+                                                    <svg data-modal-target="modal-lokasi{{ $t->id }}"
+                                                        data-modal-toggle="modal-lokasi{{ $t->id }}"
+                                                        class="cursor-pointer fill-[#08af42] hover:fill-[#0c8436]"
                                                         xmlns="http://www.w3.org/2000/svg" height="23"
                                                         viewBox="0 0 384 512">
                                                         <path
                                                             d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
                                                     </svg>
-                                                </a>
+                                                    <div id="modal-lokasi{{ $t->id }}" tabindex="-1"
+                                                        aria-hidden="true"
+                                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                        <div class="relative p-4 w-full max-w-xl max-h-fit">
+                                                            <!-- Modal content -->
+                                                            <div
+                                                                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                <!-- Modal header -->
+                                                                <div
+                                                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                                    <h3
+                                                                        class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                                        Titik lokasi
+                                                                    </h3>
+                                                                    <button type="button"
+                                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                                        data-modal-hide="modal-lokasi{{ $t->id }}">
+                                                                        <svg class="w-3 h-3" aria-hidden="true"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
+                                                                    </button>
+                                                                </div>
+                                                                <!-- Modal body -->
+                                                                <div class="p-4 md:p-5">
+                                                                    <iframe class="w-full md:w-[500px]"
+                                                                        src="https://maps.google.com/maps?q={{ $t->customer->koordinat }}&hl=es&z=14&amp;output=embed"
+                                                                        height="380" style="border:0;"
+                                                                        allowfullscreen="" loading="lazy"
+                                                                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <svg data-modal-target="modal-lokasi{{ $t->id }}"
+                                                        data-modal-toggle="modal-lokasi{{ $t->id }}"
+                                                        class="cursor-pointer fill-[#08af42] hover:fill-[#0c8436]"
+                                                        xmlns="http://www.w3.org/2000/svg" height="23"
+                                                        viewBox="0 0 384 512">
+                                                        <path
+                                                            d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                                                    </svg>
+                                                    <div id="modal-lokasi{{ $t->id }}" tabindex="-1"
+                                                        aria-hidden="true"
+                                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                                        <div class="relative p-4 w-full max-w-lg max-h-full">
+                                                            <!-- Modal content -->
+                                                            <div
+                                                                class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                                <!-- Modal header -->
+                                                                <div
+                                                                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                                                    <h3
+                                                                        class="text-xl font-semibold text-gray-900 dark:text-white">
+                                                                        Titik lokasi
+                                                                    </h3>
+                                                                    <button type="button"
+                                                                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                                        data-modal-hide="modal-lokasi{{ $t->id }}">
+                                                                        <svg class="w-3 h-3" aria-hidden="true"
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            fill="none" viewBox="0 0 14 14">
+                                                                            <path stroke="currentColor"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                                        </svg>
+                                                                        <span class="sr-only">Close modal</span>
+                                                                    </button>
+                                                                </div>
+                                                                <!-- Modal body -->
+                                                                <div class="p-4 md:p-5">
+                                                                    <p class="text-center my-10 font-normal text-gray-600">
+                                                                        Belum ada titik koordinat.
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
                                             @else
-                                                <svg data-modal-target="modal-lokasi" data-modal-toggle="modal-lokasi"
+                                                <svg data-modal-target="modal-lokasi{{ $t->id }}"
+                                                    data-modal-toggle="modal-lokasi{{ $t->id }}"
                                                     class="cursor-pointer fill-[#08af42] hover:fill-[#0c8436]"
                                                     xmlns="http://www.w3.org/2000/svg" height="23"
                                                     viewBox="0 0 384 512">
                                                     <path
                                                         d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
                                                 </svg>
-                                                <div id="modal-lokasi" tabindex="-1" aria-hidden="true"
+                                                <div id="modal-lokasi{{ $t->id }}" tabindex="-1"
+                                                    aria-hidden="true"
                                                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                                     <div class="relative p-4 w-full max-w-lg max-h-full">
                                                         <!-- Modal content -->
@@ -184,7 +287,7 @@
                                                                 </h3>
                                                                 <button type="button"
                                                                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                                                    data-modal-hide="modal-lokasi">
+                                                                    data-modal-hide="modal-lokasi{{ $t->id }}">
                                                                     <svg class="w-3 h-3" aria-hidden="true"
                                                                         xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                         viewBox="0 0 14 14">
@@ -198,7 +301,7 @@
                                                             <!-- Modal body -->
                                                             <div class="p-4 md:p-5">
                                                                 <p class="text-center my-10 font-normal text-gray-600">
-                                                                    Belum ada titik koordinat.
+                                                                    Data pelanggan mungkin sudah dihapus
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -254,7 +357,7 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button
-                                                                    class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                                                    class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                                                     Hapus
                                                                 </button>
                                                             </form>

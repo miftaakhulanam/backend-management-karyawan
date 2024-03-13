@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2
             class="flex bg-gradient-to-r from-main to-currentcolor-500 p-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2 mt-1" viewBox="0 0 640 512">
@@ -14,7 +14,8 @@
             <a href="/absensi-scan"><img src="img/contoh.png" class="w-56" alt="" /></a>
         </div>
         <div class="flex items-center justify-center gap-3 mt-10">
-            <a href="/absensi-scan" class="font-semibold text-white px-6 text-lg py-3 rounded-xl text-center bg-main">
+            <a href="/absensi-scan"
+                class="font-semibold text-white px-6 text-sm md:text-lg py-3 rounded-lg md:rounded-xl text-center bg-main hover:bg-blue-800">
                 TAB FOR PRESENT
             </a>
         </div>

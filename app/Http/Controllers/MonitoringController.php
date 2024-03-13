@@ -23,11 +23,31 @@ class MonitoringController extends Controller
     {
         $weekAgo = Carbon::now()->subWeek();
 
+        $query = Task::whereDate('created_at', '>=', $weekAgo)
+            ->orderBy('created_at', 'desc')
+            ->with('customer');
+
+        if (request()->has('search')) {
+            $searchTerm = '%' . request('search') . '%';
+            $query->where('activity', 'like', $searchTerm)
+                ->orWhere('status', 'like', $searchTerm)
+                ->orwhereHas('customer', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm)
+                        ->orWhere('id_customer', 'like', $searchTerm)
+                        ->orWhere('username', 'like', $searchTerm)
+                        ->orWhere('nik', 'like', $searchTerm)
+                        ->orWhere('phone', 'like', $searchTerm);
+                })
+                ->orWhereHas('user', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm)
+                        ->orWhere('email', 'like', $searchTerm);
+                });
+        }
+
+        $tasks = $query->get();
+
         return view('monitoring.index', [
-            'task' => Task::whereDate('created_at', '>=', $weekAgo)
-                ->orderBy('created_at', 'desc')
-                ->paginate(7)
-                ->withQueryString()
+            'task' => $tasks
         ]);
     }
 
@@ -143,7 +163,7 @@ class MonitoringController extends Controller
     public function destroy(Task $task)
     {
         Task::where('id', $task->id)->delete();
-        toast('Berhasil dihapus', 'success');
+        toast('Data berhasil dihapus', 'success');
         return redirect('/monitoring');
     }
 }

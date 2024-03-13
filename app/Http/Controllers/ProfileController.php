@@ -58,7 +58,6 @@ class ProfileController extends Controller
     {
         $rules = [
             'name' => 'required|min:3|max:255',
-            'password' => 'required|min:5|max:255',
             'phone' => 'min:10|max:20',
             'alamat' => 'max:255',
             'photo_profil' => 'image|file|max:1024'
@@ -69,10 +68,6 @@ class ProfileController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-
-        if ($request->password != $user->password) {
-            $validatedData['password'] = Hash::make($validatedData['password']);
-        }
 
         if ($request->file('photo_profil')) {
             if ($request->oldImage) {

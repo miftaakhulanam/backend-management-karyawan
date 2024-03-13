@@ -10,11 +10,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // menampilkan tanggal bulan & tahun
         $now = Carbon::now();
         $formattedDate = $now->translatedFormat('l j M Y');
-
-        // menampilkan lokasi
 
         return view('index', [
             'formattedDate' => $formattedDate,

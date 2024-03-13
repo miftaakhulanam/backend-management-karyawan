@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'name' => 'required',  //|email:dns
+            'name' => 'required',
             'password' => 'required',
         ]);
 
@@ -31,7 +31,6 @@ class LoginController extends Controller
 
         toast('Login gagal!', 'error');
         return back();
-        // return back()->with('loginError', 'Login gagal!');
     }
 
     public function logout(Request $request)

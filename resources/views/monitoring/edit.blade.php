@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2
             class="flex bg-gradient-to-r from-main to-currentcolor-500 ps-2 p-1 pt-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg class="w-5 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
@@ -11,141 +11,169 @@
             Edit Tugas Staff
         </h2>
 
-        <section class="flex justify-start items-center mt-3">
-            <div class="relative">
-                <div class="flex relative justify-center px-10 py-16 -mt-5 w-full">
-                    <form method="POST" action="/monitoring/{{ $task->id }}" enctype="multipart/form-data"
-                        class="flex flex-col gap-2 w-full font-bold">
-                        @method('put')
-                        @csrf
-                        <div class="mb-3">
-                            <h2 class="text-black text-2xl">Detail Pelanggan</h2>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="name" class="text-black">Nama</label>
-                            <div class="w-[720px]">
+        <section class="flex justify-start items-center mt-0 md:mt-3">
+            <div class="flex relative justify-center px-0 md:px-10 py-5 md:py-10 w-full md:w-[720px]">
+                <form method="POST" action="/monitoring/{{ $task->id }}" enctype="multipart/form-data"
+                    class="flex flex-col gap-2 w-full font-bold">
+                    @method('put')
+                    @csrf
+                    <table class="border-separate border-spacing-y-2">
+                        <tr class="w-full">
+                            <td class="text-black text-2xl pb-3" colspan="2">Detail Pelanggan</td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="name" class="text-black md:text-nowrap">Nama</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="name" id="name" required autocomplete="off" autofocus
                                     value="{{ old('name', $task->customer->name) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('name')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="id_customer" class="text-black">Id Pelanggan</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="id_customer" class="text-black md:text-nowrap">Id Pelanggan</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="id_customer" id="id_customer" required autocomplete="off"
                                     value="{{ old('id_customer', $task->customer->id_customer) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('id_customer')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="username" class="text-black">PPP Username</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="username" class="text-black md:text-nowrap">PPP Username</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="username" id="username" required autocomplete="off"
                                     value="{{ old('username', $task->customer->username) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('username')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="nik" class="text-black">NIK</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="nik" class="text-black md:text-nowrap">NIK</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="number" name="nik" id="nik" required pattern="[0-9]{16}"
                                     autocomplete="off" value="{{ old('nik', $task->customer->nik) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('nik')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="telepon" class="text-black">No. HP</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="telepon" class="text-black md:text-nowrap">No. HP</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="phone" id="telepon" required autocomplete="off"
                                     value="{{ old('phone', $task->customer->phone) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('phone')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="Password" class="text-black">Password Wifi</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="Password" class="text-black md:text-nowrap">Password Wifi</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="wifi_password" id="Password" autocomplete="off"
                                     value="{{ old('wifi_password', $task->customer->wifi_password) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('wifi_password')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="koordinat" class="text-black">Koordinat</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="koordinat" class="text-black md:text-nowrap">Koordinat</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="koordinat" id="koordinat" autocomplete="off"
                                     value="{{ old('koordinat', $task->customer->koordinat) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('koordinat')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="kota" class="text-black">Kota</label>
-                            <select id="kota" onchange="getKecamatan()" name="kota"
-                                class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="">Pilih Kota</option>
-                                @foreach ($kota as $k)
-                                    @if (old('kota', $task->customer->kota) == $k->id)
-                                        <option value="{{ $k->id }}" selected>{{ $k->nama }}</option>
-                                    @else
-                                        <option value="{{ $k->id }}">{{ $k->nama }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="kecamatan" class="text-black">Kecamatan</label>
-                            <select id="kecamatan" onchange="getDesa()" name="kecamatan"
-                                class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="">Pilih Kecamatan</option>
-                                @foreach ($kecamatan as $kec)
-                                    @if (old('kecamatan', $task->customer->kecamatan) == $kec->id)
-                                        <option value="{{ $kec->id }}" selected>{{ $kec->nama }}</option>
-                                    @else
-                                        <option value="{{ $kec->id }}">{{ $kec->nama }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="desa" class="text-black">Desa</label>
-                            <select id="desa" name="desa"
-                                class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="">Pilih Desa</option>
-                                @foreach ($desa as $d)
-                                    @if (old('desa', $task->customer->desa) == $d->id)
-                                        <option value="{{ $d->id }}" selected>{{ $d->nama }}</option>
-                                    @else
-                                        <option value="{{ $d->id }}">{{ $d->nama }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="flex mt-3 items-center gap-10 justify-start">
-                            <label class="text-black">Upload Data</label>
-                            <div class="flex gap-4">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="kota" class="text-black md:text-nowrap">Kota</label>
+                            </td>
+                            <td>
+                                <select id="kota" onchange="getKecamatan()" name="kota"
+                                    class="h-10 w-full border-none rounded-md font-normal">
+                                    <option value="">Pilih Kota</option>
+                                    @foreach ($kota as $k)
+                                        @if (old('kota', $task->customer->kota) == $k->id)
+                                            <option value="{{ $k->id }}" selected>{{ $k->nama }}</option>
+                                        @else
+                                            <option value="{{ $k->id }}">{{ $k->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="kecamatan" class="text-black md:text-nowrap">Kecamatan</label>
+                            </td>
+                            <td>
+                                <select id="kecamatan" onchange="getDesa()" name="kecamatan"
+                                    class="h-10 w-full border-none rounded-md font-normal">
+                                    <option value="">Pilih Kecamatan</option>
+                                    @foreach ($kecamatan as $kec)
+                                        @if (old('kecamatan', $task->customer->kecamatan) == $kec->id)
+                                            <option value="{{ $kec->id }}" selected>{{ $kec->nama }}</option>
+                                        @else
+                                            <option value="{{ $kec->id }}">{{ $kec->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="desa" class="text-black md:text-nowrap">Desa</label>
+                            </td>
+                            <td>
+                                <select id="desa" name="desa"
+                                    class="h-10 w-full border-none rounded-md font-normal">
+                                    <option value="">Pilih Desa</option>
+                                    @foreach ($desa as $d)
+                                        @if (old('desa', $task->customer->desa) == $d->id)
+                                            <option value="{{ $d->id }}" selected>{{ $d->nama }}</option>
+                                        @else
+                                            <option value="{{ $d->id }}">{{ $d->nama }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label class="text-black md:text-nowrap">Upload Data</label>
+                            </td>
+                            <td class="flex gap-4">
                                 <div>
                                     <svg id="icon-ktp"
-                                        class="cursor-pointer {{ $task->customer->photo_rumah ? '' : 'grayscale brightness-200' }}"
+                                        class="cursor-pointer {{ $task->customer->photo_ktp ? '' : 'grayscale brightness-200' }}"
                                         data-modal-target="modal-ktp" data-modal-toggle="modal-ktp"
                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" height="28">
                                         <path fill="#af0808"
@@ -269,25 +297,29 @@
                                 @error('photo_rumah')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="mb-3 mt-5">
-                            <h2 class="text-black text-2xl">Detail Aktivitas</h2>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="activity" class="text-black">Aktivitas</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td class="text-black text-2xl py-3" scope="col" colspan="2">Detail Aktivitas</td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="activity" class="text-black md:text-nowrap">Aktivitas</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="text" name="activity" id="activity" required autocomplete="off"
                                     autofocus value="{{ old('activity', $task->activity) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('activity')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="paket" class="text-black">Paket</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="paket" class="text-black md:text-nowrap">Paket</label>
+                            </td>
+                            <td class="w-full">
                                 <select id="paket" name="paket_id"
                                     class="h-10 w-full border-none rounded-md font-normal">
                                     <option value="">Pilih paket</option>
@@ -302,62 +334,65 @@
                                 @error('paket_id')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="start_time" class="text-black">Mulai Pekerjaan</label>
-                            <div class="w-[720px]">
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="start_time" class="text-black md:text-nowrap">Mulai Pekerjaan</label>
+                            </td>
+                            <td class="w-full">
                                 <input type="datetime-local" name="start_time" id="start_time" required
                                     value="{{ old('start_time', $task->start_time) }}"
                                     class="h-10 w-full border-none rounded-md font-normal" />
                                 @error('start_time')
                                     <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="status" class="text-black">Status</label>
-                            <select id="status" name="status"
-                                class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="Belum selesai"
-                                    {{ old('status', $task->status) === 'Belum selesai' ? 'selected' : '' }}>
-                                    Belum selesai
-                                </option>
-                                <option value="Tertunda"
-                                    {{ old('status', $task->status) === 'Tertunda' ? 'selected' : '' }}>
-                                    Tertunda
-                                </option>
-                                <option value="Selesai"
-                                    {{ old('status', $task->status) === 'Selesai' ? 'selected' : '' }}>
-                                    Selesai
-                                </option>
-                            </select>
-                        </div>
-                        <div class="flex justify-between">
-
-                            <div class="flex gap-x-2  ">
-
-                            </div>
-                            <button type="submit"
-                                class="flex bg-[#69B360] bg-opacity-60 hover:bg-opacity-75 w-21 h-10 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 me-2" viewBox="0 0 448 512">
-                                    <path fill="#ffffff"
-                                        d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
-                                </svg>Simpan
-                            </button>
-                    </form>
-                </div>
+                            </td>
+                        </tr>
+                        <tr class="w-full">
+                            <td>
+                                <label for="status" class="text-black md:text-nowrap">Status</label>
+                            </td>
+                            <td>
+                                <select id="status" name="status"
+                                    class="h-10 w-full border-none rounded-md font-normal">
+                                    <option value="Belum selesai"
+                                        {{ old('status', $task->status) === 'Belum selesai' ? 'selected' : '' }}>
+                                        Belum selesai
+                                    </option>
+                                    <option value="Tertunda"
+                                        {{ old('status', $task->status) === 'Tertunda' ? 'selected' : '' }}>
+                                        Tertunda
+                                    </option>
+                                    <option value="Selesai"
+                                        {{ old('status', $task->status) === 'Selesai' ? 'selected' : '' }}>
+                                        Selesai
+                                    </option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="flex justify-end gap-3">
+                        <a href="/monitoring"
+                            class="flex bg-[#FF0000] w-21 h-10 bg-opacity-50 hover:bg-opacity-65 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
+                            Batal
+                        </a>
+                        <button type="submit"
+                            class="flex bg-[#69B360] bg-opacity-60 hover:bg-opacity-75 w-21 h-10 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 me-2" viewBox="0 0 448 512">
+                                <path fill="#ffffff"
+                                    d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                            </svg>Simpan
+                        </button>
+                </form>
             </div>
         </section>
     </main>
 
     <script>
-        // Simpan nilai kecamatan yang saat ini dipilih
         var selectedKecamatan = "{{ old('kecamatan', $task->customer->kecamatan) }}";
-        // Simpan nilai desa yang saat ini dipilih
         var selectedDesa = "{{ old('desa', $task->customer->desa) }}";
 
-        // Fungsi untuk menetapkan opsi yang dipilih pada elemen select kecamatan
         function setSelectedKecamatan() {
             var kecamatanSelect = document.getElementById('kecamatan');
             for (var i = 0; i < kecamatanSelect.options.length; i++) {
@@ -368,7 +403,6 @@
             }
         }
 
-        // Fungsi untuk menetapkan opsi yang dipilih pada elemen select desa
         function setSelectedDesa() {
             var desaSelect = document.getElementById('desa');
             for (var i = 0; i < desaSelect.options.length; i++) {
@@ -379,13 +413,11 @@
             }
         }
 
-        // Panggil fungsi untuk menetapkan opsi yang dipilih setelah dokumen dimuat
         document.addEventListener('DOMContentLoaded', function() {
             setSelectedKecamatan();
             setSelectedDesa();
         });
 
-        // Fungsi untuk mendapatkan nilai yang dipilih pada elemen select kecamatan
         function getKecamatan() {
             var selectedKota = document.getElementById('kota').value;
             fetch('/api/kecamatan-by-kota?kota_id=' + selectedKota)
@@ -397,13 +429,11 @@
                         kecamatanSelect.innerHTML += '<option value="' + kecamatan.id + '">' + kecamatan.nama +
                             '</option>';
                     });
-                    // Jika kecamatan sebelumnya terpilih, pilih kembali kecamatan tersebut setelah data terisi
                     kecamatanSelect.value = selectedKecamatan;
                 });
         }
 
 
-        // Fungsi untuk mendapatkan nilai yang dipilih pada elemen select desa
         function getDesa() {
             var selectedKecamatan = document.getElementById('kecamatan').value;
             fetch('/api/desa-by-kecamatan?kecamatan_id=' + selectedKecamatan)
@@ -414,7 +444,6 @@
                     data.forEach(desa => {
                         desaSelect.innerHTML += '<option value="' + desa.id + '">' + desa.nama + '</option>';
                     });
-                    // Jika desa sebelumnya terpilih, pilih kembali desa tersebut setelah data terisi
                     desaSelect.value = selectedDesa;
                 });
         }

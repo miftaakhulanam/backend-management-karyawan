@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2
             class="flex bg-gradient-to-r from-main to-currentcolor-500 p-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2 mt-1" viewBox="0 0 640 512">
@@ -11,7 +11,7 @@
         </h2>
         <div class="flex justify-between">
             <a href="/admin-absensi/qrcode"
-                class="flex bg-[#69B360] bg-opacity-60 w-21 h-10 px-3 py-2.5 mt-5 rounded-md text-sm font-bold text-white">
+                class="flex bg-[#69B360] bg-opacity-60 hover:bg-opacity-75 w-21 h-10 px-3 py-2.5 mt-3 md:mt-5 rounded-md text-sm font-bold text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 me-2" viewBox="0 0 448 512">
                     <path fill="#ffffff"
                         d="M0 80C0 53.5 21.5 32 48 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V80zM64 96v64h64V96H64zM0 336c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V336zm64 16v64h64V352H64zM304 32h96c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H304c-26.5 0-48-21.5-48-48V80c0-26.5 21.5-48 48-48zm80 64H320v64h64V96zM256 304c0-8.8 7.2-16 16-16h64c8.8 0 16 7.2 16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16v96c0 8.8-7.2 16-16 16H368c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16v64c0 8.8-7.2 16-16 16H272c-8.8 0-16-7.2-16-16V304zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z" />
@@ -20,7 +20,7 @@
             </a>
         </div>
 
-        <div class="mt-5 overflow-x-auto">
+        <div class="mt-3 md:mt-5 overflow-x-auto">
             @if ($absensi->isEmpty())
                 <div class="flex justify-center items-center my-xl-5 w-full h-96">
                     <div class="flex flex-col justify-center items-center">

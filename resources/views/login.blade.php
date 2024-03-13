@@ -7,7 +7,7 @@
                 <div class="bg-[#96C3ED] w-[100px] h-[100px] rounded-full absolute top-9"></div>
                 <div class="bg-main w-[190px] h-[190px] rounded-full absolute -right-12 top-[55%]"></div>
                 <div
-                    class="flex relative justify-center px-10 py-16 w-[530px] h-[300px] backdrop-blur m-16 border border-[#515151] rounded-xl">
+                    class="flex relative justify-center px-10 py-16 w-[330px] md:w-[530px] h-[300px] backdrop-blur m-16 border border-[#515151] rounded-xl">
                     <div class="absolute top-0 -translate-y-1/2 mt-12  w-[70px] h-[70px] flex justify-center items-center">
                         <img src="img/logo.png" alt="">
                     </div>
@@ -24,9 +24,9 @@
 
                         <div class="flex items-center justify-center" x-data="{ show: true }">
                             <span class="text-black/50"></span>
-                            <div class="relative">
+                            <div class="relative w-96">
                                 <input placeholder="Password" id="password" name="password" required
-                                    :type="show ? 'password' : 'text'"class="text-md ps-6 h-9 w-96 border-none rounded-md" />
+                                    :type="show ? 'password' : 'text'"class="text-md ps-6 h-9 w-full border-none rounded-md" />
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
                                     <svg class="h-5 text-gray-500" fill="none" @click="show = !show"
                                         :class="{ 'hidden': !show, 'block': show }" xmlns="http://www.w3.org/2000/svg"

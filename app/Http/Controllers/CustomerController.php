@@ -17,8 +17,23 @@ class CustomerController extends Controller
      */
     public function index()
     {
+        $query = Customer::orderBy('created_at', 'desc');
+
+        if (request()->has('search')) {
+            $searchTerm = '%' . request('search') . '%';
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', $searchTerm)
+                    ->orWhere('id_customer', 'like', $searchTerm)
+                    ->orWhere('username', 'like', $searchTerm)
+                    ->orWhere('nik', 'like', $searchTerm)
+                    ->orWhere('phone', 'like', $searchTerm);
+            });
+        }
+
+        $customers = $query->paginate(7)->withQueryString();
+
         return view('pelanggan.index', [
-            'customer' => Customer::orderBy('created_at', 'desc')->paginate(7)->withQueryString()
+            'customer' => $customers
         ]);
     }
 
@@ -156,7 +171,7 @@ class CustomerController extends Controller
         }
 
         Customer::where('id', $customer->id)->delete();
-        toast('Berhasil dihapus', 'success');
+        toast('Data berhasil dihapus', 'success');
         return redirect('/customer');
     }
 }

@@ -10,7 +10,6 @@ use App\Models\Paket;
 use App\Models\Customer;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
@@ -71,10 +70,11 @@ class TaskController extends Controller
         $validatedTask = $request->validate([
             'activity' => 'required|max:255',
             'start_time' => 'required',
+            'paket' => 'required'
         ]);
 
         $validatedTask['user_id'] = auth()->user()->id;
-        $validatedTask['paket_id'] = $request->paket;
+        $validatedTask['paket_id'] = $validatedTask['paket'];
         $validatedTask['customer_id'] = $customer->id;
 
         Task::create($validatedTask);
@@ -181,7 +181,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         Task::where('id', $task->id)->delete();
-        toast('Berhasil dihapus', 'success');
+        toast('Data berhasil dihapus', 'success');
         return redirect('/tugas');
     }
 }

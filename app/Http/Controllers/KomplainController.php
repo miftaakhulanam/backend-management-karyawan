@@ -12,14 +12,24 @@ class KomplainController extends Controller
      */
     public function index()
     {
+        $endpoint = "http://192.168.68.14:3000/devices/?query=%7B%22_lastInform%22%3A%7B%22%24lt%22%3A%222017-12-11%2013%3A16%3A23%20%2B0000%22%7D%7D";
         $client = new Client();
+        // $id = 5;
+        // $value = "ABC";
 
-        $response = $client->get('http://http://192.168.68.14:3000/genieacs/api/devices', [
-            'auth' => ['admin', 'admin']
-        ]);
+        $response = $client->request('GET', $endpoint, ['query' => [
+            // 'key1' => $id,
+            // 'key2' => $value,
+        ]]);
 
-        $data = json_decode($response->getBody(), true);
-        dd($data);
+        // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
+
+        $statusCode = $response->getStatusCode();
+        $content = $response->getBody();
+        dd($content);
+
+        // or when your server returns json
+        // $content = json_decode($response->getBody(), true);
 
         return view('komplain.komplain', [
             'title' => 'Komplain'

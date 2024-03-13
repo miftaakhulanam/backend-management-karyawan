@@ -12,6 +12,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\PengaturanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,31 +25,37 @@ use App\Http\Controllers\MonitoringController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-Route::get('/admin-absensi', [QRCodeController::class, 'index'])->middleware(['super.admin']);
-Route::get('/admin-absensi/qrcode', [QRCodeController::class, 'qrcode'])->middleware(['super.admin']);
+Route::middleware(['super.admin'])->group(function () {
+    Route::get('/admin-absensi', [QRCodeController::class, 'index']);
+    Route::get('/admin-absensi/qrcode', [QRCodeController::class, 'qrcode']);
+});
 
-Route::get('/absensi', [AbsensiController::class, 'index'])->middleware(['auth']);
-Route::get('/absensi-scan', [AbsensiController::class, 'scan'])->middleware(['auth']);
-Route::post('/absensi/store', [AbsensiController::class, 'store'])->middleware(['auth']);
-Route::get('/absensi/success', [AbsensiController::class, 'success'])->middleware(['auth']);
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/absensi', [AbsensiController::class, 'index']);
+    Route::get('/absensi-scan', [AbsensiController::class, 'scan']);
+    Route::post('/absensi/store', [AbsensiController::class, 'store']);
+    Route::get('/absensi/success', [AbsensiController::class, 'success']);
+    Route::resource('/komplain', KomplainController::class);
+    Route::resource('/profile', ProfileController::class)->parameters(['profile' => 'user']);
+});
 
-Route::resource('/monitoring', MonitoringController::class)->parameters(['monitoring' => 'task'])->middleware(['admin']);
+Route::middleware(['admin'])->group(function () {
+    Route::resource('/monitoring', MonitoringController::class)->parameters(['monitoring' => 'task']);
+    Route::resource('/staff', StaffController::class);
+});
 
-Route::resource('/staff', StaffController::class)->middleware('admin');
+Route::middleware(['staff'])->group(function () {
+    Route::resource('/tugas', TaskController::class)->parameters(['tugas' => 'task']);
+    Route::resource('/customer', CustomerController::class);
+});
 
-Route::resource('/komplain', KomplainController::class)->middleware('auth');
-
-Route::resource('/profile', ProfileController::class)->parameters(['profile' => 'user'])->middleware('auth');
-
-Route::resource('/tugas', TaskController::class)->parameters(['tugas' => 'task'])->middleware(['staff']);
-
-Route::resource('/customer', CustomerController::class)->middleware('staff');
+Route::resource('/pengaturan/paket', PengaturanController::class)->parameters(['pengaturan' => 'paket'])->middleware(['auth']);
 
 Route::get('/api/kecamatan-by-kota', [ApiController::class, 'kecamatanByKota']);
 Route::get('/api/desa-by-kecamatan', [ApiController::class, 'desaByKecamatan']);

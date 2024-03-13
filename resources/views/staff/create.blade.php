@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2
             class="flex bg-gradient-to-r from-main to-currentcolor-500 ps-2 p-1 pt-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg width="35" height="31" viewBox="0 0 35 31" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -20,114 +20,150 @@
 
         <section class="flex justify-start items-center mt-3">
             <div class="relative">
-                <div class="flex relative justify-center px-10 py-16 -mt-5 w-full">
+                <div class="flex relative justify-center px-0 md:px-10 py-5 md:py-10 w-full md:w-[720px]">
                     <form method="POST" action="/staff" enctype="multipart/form-data"
                         class="flex flex-col gap-2 w-full text-md font-bold">
                         @csrf
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="nama" class="text-black">Nama</label>
-                            <div class="w-[720px]">
-                                <input type="text" name="name" id="nama" required autocomplete="off" autofocus
-                                    value="{{ old('name') }}" class="h-10 w-full border-none rounded-md font-normal" />
-                                @error('nama')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="email" class="text-black">Email</label>
-                            <div class="w-[720px]">
-                                <input type="email" name="email" id="email" required autocomplete="off" autofocus
-                                    value="{{ old('email') }}" class="h-10 w-full border-none rounded-md font-normal" />
-                                @error('email')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="password" class="text-black">Password</label>
-                            <div class="w-[720px]">
-                                <input type="password" name="password" id="password" required autocomplete="off"
-                                    value="{{ old('password') }}" class="h-10 w-full border-none rounded-md font-normal" />
-                                @error('password')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="telepon" class="text-black">No. HP</label>
-                            <div class="w-[720px]">
-                                <input type="text" name="phone" id="telepon" autocomplete="off"
-                                    value="{{ old('phone') }}" class="h-10 w-full border-none rounded-md font-normal" />
-                                @error('phone')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="alamat" class="text-black">Alamat</label>
-                            <div class="w-[720px]">
-                                <input type="text" name="alamat" id="alamat" autocomplete="off"
-                                    value="{{ old('alamat') }}" class="h-10 w-full border-none rounded-md font-normal" />
-                                @error('alamat')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="jabatan" class="text-black">Jabatan</label>
-                            <select id="jabatan" name="jabatan" class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="Teknisi Lpngn" {{ old('jabatan') === 'Teknisi Lpngn' ? 'selected' : '' }}>
-                                    Teknisi Lpngn
-                                </option>
-                                <option value="Admin" {{ old('jabatan') === 'Admin' ? 'selected' : '' }}>
-                                    Admin
-                                </option>
-                                <option value="NOC" {{ old('jabatan') === 'NOC' ? 'selected' : '' }}>
-                                    NOC
-                                </option>
-                                <option value="Asisten NOC" {{ old('jabatan') === 'Asisten NOC' ? 'selected' : '' }}>
-                                    Asisten NOC
-                                </option>
-                                <option value="Marketing" {{ old('jabatan') === 'Marketing' ? 'selected' : '' }}>
-                                    Marketing
-                                </option>
-                                <option value="Direktur" {{ old('jabatan') === 'Direktur' ? 'selected' : '' }}>
-                                    Direktur
-                                </option>
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="role" class="text-black">Role</label>
-                            <select id="role" name="is_admin"
-                                class="h-10 w-[720px] border-none rounded-md font-normal">
-                                <option value="staff" {{ old('is_admin') === 'staff' ? 'selected' : '' }}>
-                                    Staff
-                                </option>
-                                <option value="admin" {{ old('is_admin') === 'admin' ? 'selected' : '' }}>
-                                    Admin
-                                </option>
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-3 justify-between">
-                            <label for="photo_profil" class="text-black">Photo profil</label>
-                            <div class="w-[720px]">
-                                <input type="file" name="photo_profil" id="photo_profil"
-                                    value="{{ old('photo_profil') }}" onchange="previewImage()"
-                                    class="h-10 w-full bg-white border-none rounded-md font-normal" />
-                                @error('photo_profil')
-                                    <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                                @enderror
-                                <img class="img-preview img-fluid w-1/3">
-                            </div>
-                        </div>
-                        <div class="flex justify-between">
-
-                            <div class="flex gap-x-2  ">
-
-                            </div>
+                        <table class="border-separate border-spacing-y-2">
+                            <tr class="w-full">
+                                <td>
+                                    <label for="nama" class="text-black">Nama</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="text" name="name" id="nama" required autocomplete="off"
+                                        autofocus value="{{ old('name') }}"
+                                        class="h-10 w-full border-none rounded-md font-normal" />
+                                    @error('name')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="email" class="text-black">Email</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="email" name="email" id="email" required autocomplete="off"
+                                        autofocus value="{{ old('email') }}"
+                                        class="h-10 w-full border-none rounded-md font-normal" />
+                                    @error('email')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="password" class="text-black">Password</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="password" name="password" id="password" required autocomplete="off"
+                                        value="{{ old('password') }}"
+                                        class="h-10 w-full border-none rounded-md font-normal" />
+                                    @error('password')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="telepon" class="text-black">No. HP</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="text" name="phone" id="telepon" autocomplete="off"
+                                        value="{{ old('phone') }}"
+                                        class="h-10 w-full border-none rounded-md font-normal" />
+                                    @error('phone')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="alamat" class="text-black">Alamat</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="text" name="alamat" id="alamat" autocomplete="off"
+                                        value="{{ old('alamat') }}"
+                                        class="h-10 w-full border-none rounded-md font-normal" />
+                                    @error('alamat')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="jabatan" class="text-black">Jabatan</label>
+                                </td>
+                                <td>
+                                    <select id="jabatan" name="jabatan"
+                                        class="h-10 w-full border-none rounded-md font-normal">
+                                        <option value="Teknisi Lpngn"
+                                            {{ old('jabatan') === 'Teknisi Lpngn' ? 'selected' : '' }}>
+                                            Teknisi Lpngn
+                                        </option>
+                                        <option value="Admin" {{ old('jabatan') === 'Admin' ? 'selected' : '' }}>
+                                            Admin
+                                        </option>
+                                        <option value="NOC" {{ old('jabatan') === 'NOC' ? 'selected' : '' }}>
+                                            NOC
+                                        </option>
+                                        <option value="Asisten NOC"
+                                            {{ old('jabatan') === 'Asisten NOC' ? 'selected' : '' }}>
+                                            Asisten NOC
+                                        </option>
+                                        <option value="Marketing" {{ old('jabatan') === 'Marketing' ? 'selected' : '' }}>
+                                            Marketing
+                                        </option>
+                                        <option value="Direktur" {{ old('jabatan') === 'Direktur' ? 'selected' : '' }}>
+                                            Direktur
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="role" class="text-black">Role</label>
+                                </td>
+                                <td>
+                                    <select id="role" name="is_admin"
+                                        class="h-10 w-full border-none rounded-md font-normal">
+                                        <option value="staff" {{ old('is_admin') === 'staff' ? 'selected' : '' }}>
+                                            Staff
+                                        </option>
+                                        <option value="admin" {{ old('is_admin') === 'admin' ? 'selected' : '' }}>
+                                            Admin
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="w-full">
+                                <td>
+                                    <label for="photo_profil" class="text-black md:text-nowrap">Photo profil</label>
+                                </td>
+                                <td class="w-full">
+                                    <input type="file" name="photo_profil" id="photo_profil"
+                                        value="{{ old('photo_profil') }}" onchange="previewImage()"
+                                        class="h-10 w-full bg-white border-none rounded-md font-normal" />
+                                    @error('photo_profil')
+                                        <p class="mt-2 font-normal text-sm text-red-600 dark:text-red-500">{{ $message }}
+                                        </p>
+                                    @enderror
+                                    <img class="img-preview img-fluid w-1/3">
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="flex justify-end gap-3">
+                            <a href="/staff"
+                                class="flex bg-[#FF0000] w-21 h-10 bg-opacity-50 hover:bg-opacity-65 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
+                                Batal
+                            </a>
                             <button type="submit"
-                                class="flex bg-[#69B360] bg-opacity-60 w-21 h-10 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
+                                class="flex bg-[#69B360] bg-opacity-60 hover:bg-opacity-75 w-21 h-10 px-3 py-2.5 mt-5 rounded-md text-sm font-medium text-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-4 me-2" viewBox="0 0 448 512">
                                     <path fill="#ffffff"
                                         d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />

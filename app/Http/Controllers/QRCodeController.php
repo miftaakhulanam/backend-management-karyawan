@@ -19,14 +19,10 @@ class QRCodeController extends Controller
 
     public function qrcode(GenerateQRCode $generator)
     {
-        // Generate QR code content dengan karakter acak
         $qrCodeContent = 'ptpersadadatamultimedia-' . Str::random(10) . '-' . Carbon::now()->format('Ymd');
 
-        // Panggil service untuk membuat QR code
         $qrCodePath = $generator->generate($qrCodeContent);
 
-        // Tampilkan QR code pada view
         return view('absensi_admin.qrcode', ['qrCodePath' => $qrCodePath]);
-        // return view('absensi_admin.qrcode');
     }
 }

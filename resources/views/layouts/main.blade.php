@@ -17,6 +17,7 @@
     {{-- Instascan --}}
     {{-- <script type="text/javascript" src="node_modules/instascan/dist/instascan.min.js"></script> --}}
     <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" /> --}}
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <title>PERSADA DATA MULTIMEDIA</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -43,7 +44,7 @@
                         <form action="/logout" method="POST">
                             @csrf
                             <button
-                                class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                 Logout
                             </button>
                         </form>
@@ -75,6 +76,7 @@
 
     </div>
 
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
 </body>
 
 </html>

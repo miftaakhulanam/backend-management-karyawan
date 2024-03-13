@@ -14,10 +14,25 @@ class StaffController extends Controller
      */
     public function index()
     {
+        $query = User::whereIn('is_admin', ['Admin', 'Staff'])
+            ->orderBy('is_admin', 'asc');
+
+        if (request()->has('search')) {
+            $searchTerm = '%' . request('search') . '%';
+            $query->where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', $searchTerm)
+                    ->orWhere('email', 'like', $searchTerm)
+                    ->orWhere('phone', 'like', $searchTerm)
+                    ->orWhere('alamat', 'like', $searchTerm)
+                    ->orWhere('jabatan', 'like', $searchTerm)
+                    ->orWhere('is_admin', 'like', $searchTerm);
+            });
+        }
+
+        $users = $query->get();
+
         return view('staff.index', [
-            'user' => User::whereIn('is_admin', ['Admin', 'Staff'])
-                ->orderBy('is_admin', 'asc')
-                ->get()
+            'user' => $users
         ]);
     }
 
@@ -125,7 +140,7 @@ class StaffController extends Controller
         }
 
         User::where('id', $staff->id)->delete();
-        toast('Berhasil dihapus', 'success');
+        toast('Data berhasil dihapus', 'success');
         return redirect('/staff');
     }
 }

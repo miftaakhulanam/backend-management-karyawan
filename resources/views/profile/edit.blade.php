@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2 class="flex px-2 rounded-sm font-inter border-l-4 border-main font-bold items-center text-main text-lg">
             <div class="bg-white h-10 w-10 me-5 rounded-full flex justify-center items-center">
                 <svg class="fill-main h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -17,7 +17,7 @@
                 <div class="bg-main w-[120px] h-[120px] rounded-full absolute right-0 top-[35%]"></div>
                 <div class="bg-[#35AFE1] w-[80px] h-[80px] rounded-full absolute bottom-8 left-12"></div>
                 <div
-                    class="flex relative justify-center px-10 py-16 w-[430px] min-h-max backdrop-blur m-16 border border-[#515151] rounded-xl">
+                    class="flex relative justify-center px-7 md:px-10 py-7 md:py-16 w-[300px] md:w-[430px] min-h-max backdrop-blur m-16 border border-[#515151] rounded-xl">
                     <div
                         class="absolute top-0 -translate-y-1/2 w-[70px] h-[70px] rounded-full border-[3px] border-gray-400/80 overflow-hidden">
                         @if (auth()->user()->photo_profil)
@@ -25,7 +25,7 @@
                                 src="{{ asset('storage/' . auth()->user()->photo_profil) }}"
                                 alt="{{ auth()->user()->name }}">
                         @else
-                            <img class="img-preview" src="{{ asset('img/profile.png') }}"
+                            <img class="img-preview object-cover w-full h-full" src="{{ asset('img/profile.png') }}"
                                 alt="{{ auth()->user()->username }}">
                         @endif
                         <label for="photo_profil"
@@ -53,7 +53,7 @@
                             <label for="nama" class="text-black/50">Nama</label>
                             <input type="text" name="name" id="nama" required autocomplete="off"
                                 value="{{ old('name', auth()->user()->name) }}"
-                                class="h-8 border-none rounded-md w-[270px]" />
+                                class="h-8 border-none rounded-md w-[170px] md:w-[270px]" />
                         </div>
                         @error('name')
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -62,25 +62,16 @@
                             <label for="email" class="text-black/50">Email</label>
                             <input type="email" name="email" id="email" required autocomplete="off"
                                 value="{{ old('email', auth()->user()->email) }}"
-                                class="h-8 border-none rounded-md w-[270px]" />
+                                class="h-8 border-none rounded-md w-[170px] md:w-[270px]" />
                         </div>
                         @error('email')
-                            <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
-                        @enderror
-                        <div class="flex items-center justify-between">
-                            <label for="password" class="text-black/50">Password</label>
-                            <input type="password" name="password" id="password" required autocomplete="off"
-                                value="{{ old('password', auth()->user()->password) }}"
-                                class="h-8 border-none rounded-md w-[270px]" />
-                        </div>
-                        @error('password')
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                         @enderror
                         <div class="flex items-center justify-between">
                             <label for="telepon" class="text-black/50">No. Telp</label>
                             <input type="text" name="phone" id="telepon" autocomplete="off"
                                 value="{{ old('phone', auth()->user()->phone) }}"
-                                class="h-8 border-none rounded-md w-[270px]" />
+                                class="h-8 border-none rounded-md w-[170px] md:w-[270px]" />
                         </div>
                         @error('phone')
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -89,7 +80,7 @@
                             <label for="alamat" class="text-black/50">Alamat</label>
                             <input type="text" name="alamat" id="alamat" autocomplete="off"
                                 value="{{ old('alamat', auth()->user()->alamat) }}"
-                                class="h-8 border-none rounded-md w-[270px]" />
+                                class="h-8 border-none rounded-md w-[170px] md:w-[270px]" />
                         </div>
                         @error('alamat')
                             <p class="text-sm text-red-600 dark:text-red-500">{{ $message }}</p>

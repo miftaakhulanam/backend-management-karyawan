@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 min-h-screen p-10 mt-14">
+    <main class="flex-1 min-h-screen px-4 py-8 md:p-10 mt-12 md:mt-14">
         <h2
             class="flex bg-gradient-to-r from-main to-currentcolor-500 p-2 rounded-lg font-inter font-bold text-white text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-2 mt-1" viewBox="0 0 640 512">
@@ -28,14 +28,11 @@
     <script type="text/javascript">
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview'),
-            // mirror: false
+            mirror: false
         });
-        // scanner.addListener('scan', function(content) {
-        //     alert(content);
-        // });
         Instascan.Camera.getCameras().then(function(cameras) {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]);
+            if (cameras.length > 1) {
+                scanner.start(cameras[1]);
             } else {
                 console.error('No cameras found.');
             }
