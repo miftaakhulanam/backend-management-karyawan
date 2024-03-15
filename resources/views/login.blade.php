@@ -7,16 +7,12 @@
                 <div class="bg-[#96C3ED] w-[100px] h-[100px] rounded-full absolute top-9"></div>
                 <div class="bg-main w-[190px] h-[190px] rounded-full absolute -right-12 top-[55%]"></div>
                 <div
-                    class="flex relative justify-center px-10 py-16 w-[330px] md:w-[530px] h-[300px] backdrop-blur m-16 border border-[#515151] rounded-xl">
+                    class="flex relative justify-center px-10 md:px-16 py-16 w-[330px] md:w-[530px] h-[300px] backdrop-blur m-16 border border-[#515151] rounded-xl">
                     <div class="absolute top-0 -translate-y-1/2 mt-12  w-[70px] h-[70px] flex justify-center items-center">
                         <img src="img/logo.png" alt="">
                     </div>
                     <form action="/login" method="POST" class="flex flex-col gap-3 w-full mt-9">
                         @csrf
-                        {{-- <div class="flex items-center justify-center">
-                            <label for="username" class="text-black/50"></label>
-                        </div> --}}
-
                         <div class="flex flex-col gap-3 items-center justify-center" x-data="{ show: true }">
                             <input type="text" name="name" placeholder="Username" id="username" autofocus required
                                 value="{{ old('name') }}" class="text-md ps-6 h-9 w-full border-none rounded-md" />
