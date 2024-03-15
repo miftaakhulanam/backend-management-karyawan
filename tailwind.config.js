@@ -6,7 +6,6 @@ export default {
         "./resources/**/*.js",
         "./resources/**/*.vue",
         "./node_modules/flowbite/**/*.js",
-        "https://8995-120-188-87-22.ngrok-free.app/",
     ],
     theme: {
         colors: {
