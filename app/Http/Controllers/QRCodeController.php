@@ -17,6 +17,16 @@ class QRCodeController extends Controller
         ]);
     }
 
+    public function rekap()
+    {
+        $startDate = Carbon::now()->subDays(30)->startOfDay();
+        $endDate = Carbon::now()->endOfDay();
+
+        return view('absensi_admin.rekap', [
+            'absensi' => Absensi::whereBetween('created_at', [$startDate, $endDate])->get()
+        ]);
+    }
+
     public function qrcode(GenerateQRCode $generator)
     {
         $qrCodeContent = 'ptpersadadatamultimedia-' . Str::random(10) . '-' . Carbon::now()->format('Ymd');

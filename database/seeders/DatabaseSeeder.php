@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'phone' => +628865234875,
             'alamat' => 'Jl. KH. Hasyim Asyary',
             'jabatan' => 'admin',
-            'is_admin' => 'admin',
+            'is_admin' => 'Admin',
             'photo_profil' => null,
             'remember_token' => Str::random(10)
         ]);
@@ -47,7 +47,7 @@ class DatabaseSeeder extends Seeder
             'phone' => +62858512512836,
             'alamat' => 'Jl. Gatot Subroto',
             'jabatan' => 'NOC',
-            'is_admin' => 'staff',
+            'is_admin' => 'Staff',
             'photo_profil' => null,
             'remember_token' => Str::random(10)
         ]);

@@ -12,7 +12,11 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\KomplainController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MonitoringController;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PengaturanController;
+use App\Http\Controllers\AdminKomplainController;
+use App\Http\Controllers\KomplainStaffController;
+use App\Http\Controllers\AdminMonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,27 +36,32 @@ Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::middleware(['super.admin'])->group(function () {
     Route::get('/admin-absensi', [QRCodeController::class, 'index']);
+    Route::get('/admin-absensi/rekap', [QRCodeController::class, 'rekap']);
     Route::get('/admin-absensi/qrcode', [QRCodeController::class, 'qrcode']);
+    Route::resource('monitoring-admin', AdminMonitoringController::class)->parameters(['monitoring-admin' => 'task']);
+    Route::resource('/komplain-admin', AdminKomplainController::class)->parameters(['komplain-admin' => 'komplain']);
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/notifikasi', [NotifikasiController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/absensi', [AbsensiController::class, 'index']);
     Route::get('/absensi-scan', [AbsensiController::class, 'scan']);
     Route::post('/absensi/store', [AbsensiController::class, 'store']);
     Route::get('/absensi/success', [AbsensiController::class, 'success']);
-    Route::resource('/komplain', KomplainController::class);
     Route::resource('/profile', ProfileController::class)->parameters(['profile' => 'user']);
+    Route::resource('/staff', StaffController::class);
+    Route::resource('/customer', CustomerController::class);
 });
 
 Route::middleware(['admin'])->group(function () {
     Route::resource('/monitoring', MonitoringController::class)->parameters(['monitoring' => 'task']);
-    Route::resource('/staff', StaffController::class);
+    Route::resource('/komplain', KomplainController::class);
 });
 
 Route::middleware(['staff'])->group(function () {
     Route::resource('/tugas', TaskController::class)->parameters(['tugas' => 'task']);
-    Route::resource('/customer', CustomerController::class);
+    Route::resource('/komplain-staff', KomplainStaffController::class)->parameters(['komplain-staff' => 'komplain']);
 });
 
 Route::resource('/pengaturan/paket', PengaturanController::class)->parameters(['pengaturan' => 'paket'])->middleware(['auth']);

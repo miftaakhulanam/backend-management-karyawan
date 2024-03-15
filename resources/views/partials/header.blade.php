@@ -46,7 +46,7 @@
                                 </svg>
                                 <p class="block px-4 py-2">Profile</p>
                             </a>
-                            @if (Gate::check('admin') || Gate::check('super_admin'))
+                            @if (Gate::check('admin') || Gate::check('super.admin'))
                                 <a href="/pengaturan/paket"
                                     class="flex items-center py-1 px-4 border-b-2 mx-5 hover:bg-gray-200 hover:mx-0 hover:ps-9 hover:rounded-lg">
                                     <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
@@ -97,7 +97,7 @@
                                     <p class="block px-4 py-2">Pengaturan</p>
                                 </a>
                             @endif
-                            <a href="notif-admin.html"
+                            <a href="/notifikasi"
                                 class="flex items-center py-1 px-4 mx-4 hover:bg-gray-200 hover:mx-0 hover:ps-8 hover:rounded-lg">
                                 <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path fill="#1061cc"

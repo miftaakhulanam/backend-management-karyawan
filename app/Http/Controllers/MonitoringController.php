@@ -21,11 +21,12 @@ class MonitoringController extends Controller
      */
     public function index()
     {
-        $weekAgo = Carbon::now()->subWeek();
+        $startDate = Carbon::now()->subDays(7)->startOfDay();
+        $endDate = Carbon::now()->endOfDay();
 
-        $query = Task::whereDate('created_at', '>=', $weekAgo)
+        $query = Task::whereBetween('created_at', [$startDate, $endDate])
             ->orderBy('created_at', 'desc')
-            ->with('customer');
+            ->with(['customer', 'user']);
 
         if (request()->has('search')) {
             $searchTerm = '%' . request('search') . '%';

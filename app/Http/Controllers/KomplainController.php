@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use GuzzleHttp\Client;
+use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Customer;
+use App\Models\Komplain;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class KomplainController extends Controller
 {
@@ -12,27 +16,45 @@ class KomplainController extends Controller
      */
     public function index()
     {
-        $endpoint = "http://192.168.68.14:3000/devices/?query=%7B%22_lastInform%22%3A%7B%22%24lt%22%3A%222017-12-11%2013%3A16%3A23%20%2B0000%22%7D%7D";
-        $client = new Client();
-        // $id = 5;
-        // $value = "ABC";
+        $startDate = Carbon::now()->subDays(7)->startOfDay();
+        $endDate = Carbon::now()->endOfDay();
 
-        $response = $client->request('GET', $endpoint, ['query' => [
-            // 'key1' => $id,
-            // 'key2' => $value,
-        ]]);
+        $query = Komplain::whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('created_at', 'desc')
+            ->with(['customer', 'user']);
 
-        // url will be: http://my.domain.com/test.php?key1=5&key2=ABC;
+        if (request()->has('search')) {
+            $searchTerm = '%' . request('search') . '%';
+            $query->where('pesan', 'like', $searchTerm)
+                ->orWhere('status', 'like', $searchTerm)
+                ->orwhereHas('customer', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm)
+                        ->orWhere('id_customer', 'like', $searchTerm)
+                        ->orWhere('username', 'like', $searchTerm)
+                        ->orWhere('nik', 'like', $searchTerm)
+                        ->orWhere('phone', 'like', $searchTerm);
+                })
+                ->orWhereHas('user', function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', $searchTerm)
+                        ->orWhere('email', 'like', $searchTerm);
+                });
+        }
 
-        $statusCode = $response->getStatusCode();
-        $content = $response->getBody();
-        dd($content);
+        $komplains = $query->get();
 
-        // or when your server returns json
-        // $content = json_decode($response->getBody(), true);
+        return view('komplain.index', [
+            'komplain' => $komplains
+        ]);
+    }
 
-        return view('komplain.komplain', [
-            'title' => 'Komplain'
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('komplain.create', [
+            'user' => User::all(),
+            'customer' => Customer::all()
         ]);
     }
 
@@ -41,30 +63,82 @@ class KomplainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'user_id' => 'required',
+            'customer_id' => 'required',
+            'pesan' => 'required|max:255',
+            'photo' => 'image|file|max:1024'
+        ]);
+
+        if ($request->photo) {
+            $validatedData['photo'] = $request->file('photo')->store('photo-komplain');
+        }
+
+        Komplain::create($validatedData);
+        toast('Berhasil ditambahkan', 'success');
+        return redirect('/komplain');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Komplain $komplain)
     {
         //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Komplain $komplain)
+    {
+        return view('komplain.edit', [
+            'komplain' => $komplain,
+            'user' => User::all(),
+            'customer' => Customer::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Komplain $komplain)
     {
-        //
+        $rules = [
+            'user_id' => 'required',
+            'customer_id' => 'required',
+            'pesan' => 'required|max:255',
+            'status' => 'required',
+            'photo' => 'image|file|max:1024'
+        ];
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('photo')) {
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validatedData['photo'] = $request->file('photo')->store('photo-komplain');
+        }
+
+        Komplain::where('id', $komplain->id)
+            ->update($validatedData);
+
+        toast('Berhasil diperbarui', 'success');
+        return redirect('/komplain');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Komplain $komplain)
     {
-        //
+        if ($komplain->photo) {
+            Storage::delete($komplain->photo);
+        }
+
+        Komplain::where('id', $komplain->id)->delete();
+        toast('Data berhasil dihapus', 'success');
+        return redirect('/komplain');
     }
 }

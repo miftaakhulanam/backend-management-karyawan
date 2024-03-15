@@ -8,7 +8,7 @@
             </h2>
             <p class="text-center text-sm font-semibold">{{ auth()->user()->email }}</p>
         </div>
-        @can('super_admin')
+        @can('super.admin')
             <li>
                 <a class="flex items-center px-6 py-2 mt-3 text-white {{ Request::is('/') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
                     href="/">
@@ -28,6 +28,51 @@
                     </svg>
                     <span class="mx-3">Absensi</span>
                 </a>
+            </li>
+            <li>
+                <a class="flex items-center px-6 py-2 mt-1 text-white {{ Request::is('monitoring*') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
+                    href="/monitoring-admin">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path fill="#ffffff"
+                            d="M64 0C28.7 0 0 28.7 0 64V352c0 35.3 28.7 64 64 64H240l-10.7 32H160c-17.7 0-32 14.3-32 32s14.3 32 32 32H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H346.7L336 416H512c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H64zM512 64V288H64V64H512z" />
+                    </svg>
+                    <span class="mx-3">Monitoring Staff</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center px-6 py-2 mt-1 text-white {{ Request::is('staff*') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
+                    href="/staff">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#ffffff"
+                            d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H256c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H192c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                    </svg>
+                    <span class="mx-3">Kelola Staff</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center px-6 py-2 mt-1 text-white {{ Request::is('customer*') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
+                    href="/customer">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+                            <circle cx="12" cy="8" r="2" />
+                            <path d="M15 13a3 3 0 1 0-6 0" />
+                        </g>
+                    </svg>
+                    <span class="mx-3">Daftar Pelanggan</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center px-6 py-2 mt-1 text-white {{ Request::is('komplain*') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
+                    href="/komplain-admin">
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#ffffff"
+                            d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+                    </svg>
+                    <span class="mx-3">Komplain</span>
+                </a>
+
             </li>
         @else
             <li>
@@ -95,13 +140,14 @@
             @endcan
             <li>
                 <a class="flex items-center px-6 py-2 mt-1 text-white {{ Request::is('komplain*') ? 'bg-gray-200 bg-opacity-25' : '' }} hover:bg-gray-200 hover:bg-opacity-25 rounded-md"
-                    href="/komplain">
+                    href="{{ auth()->user()->is_admin == 'Admin' ? '/komplain' : '/komplain-staff' }}">
                     <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path fill="#ffffff"
                             d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
                     </svg>
                     <span class="mx-3">Komplain</span>
                 </a>
+
             </li>
         @endcan
     </ul>

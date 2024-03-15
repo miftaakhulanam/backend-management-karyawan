@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
-    <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 mt-14">
+    <main class="flex-1 min-h-screen mt-14">
         <div class="flex flex-col gap-3 sm:gap-6 px-4 py-8 md:p-10">
             <div class="bg-white p-8 rounded-xl shadow-xl">
                 <div class="flex relative">
@@ -11,7 +11,7 @@
                         </h1>
                         <div>
                             <p class="text-gray-900 text-sm sm:text-base  font-bold">
-                                Siap memuali harimu di PT. Persada<br class="block lg:hidden"> Data Multimedia ?
+                                Siap memulai harimu di PT. Persada<br class="block lg:hidden"> Data Multimedia ?
                             </p>
                             <p class="text-sm sm:text-base">yuk lihat dan cek beranda mu ...</p>
                         </div>
@@ -19,7 +19,7 @@
                     <img class="absolute w-36 -right-12 -bottom-8" src="../img/avatar.png" alt="" />
                 </div>
             </div>
-            <div class="flex flex-col lg:flex-row gap-3 sm:gap-6">
+            <div class="flex flex-col lg:flex-row gap-3 sm:gap-6 max-h-full">
                 <div class="md:p-8 p-5 bg-white rounded-xl shadow-xl flex-1" x-data="app()" x-init="[initDate(), getNoOfDays()]"
                     x-cloak>
                     <div class="px-4 flex items-center justify-between">
@@ -88,48 +88,30 @@
                 </div>
 
                 <!-- widget -->
-                <div class="flex flex-col bg-white rounded-xl shadow-xl p-8 w-full flex-1">
-                    <div class="font-bold text-xl"></div>
-                    <div class="text-sm text-gray-500">
-                        {{ $formattedDate }}</div>
+                @if ($komplain->isEmpty())
                     <div
-                        class="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-[rgb(16,97,204)] h-24 w-24">
-                        <svg class="w-32 h-32" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z">
-                            </path>
-                        </svg>
+                        class="flex flex-col bg-white w-full shadow-xl rounded-xl flex-1 min-h-14 justify-center items-center">
+                        <p class="font-normal text-gray-400">Tidak ada notifikasi</p>
                     </div>
-                    <div class="flex flex-row items-center justify-center mt-6">
-                        <div class="font-medium text-6xl">24°</div>
-                        <div class="flex flex-col items-center ml-6">
-                            <div>Berawan</div>
-                            <div class="mt-1">
-                                <span class="text-sm"><i class="far fa-long-arrow-up"></i></span>
-                                <span class="text-sm font-light text-gray-500">28°C</span>
+                @else
+                    <div class="flex flex-col w-full flex-1 overflow-y-auto gap-2">
+                        @foreach ($komplain as $k)
+                            <div class="flex  justify-between items-center bg-white font-medium rounded-xl h-20 px-10">
+                                <div class="flex items-center gap-4">
+                                    @if ($k->status == 'Selesai')
+                                        <div class="bg-green-500 rounded-full w-4 h-4 text-center me-2"></div>
+                                    @elseif($k->status == 'Tertunda')
+                                        <div class="bg-yellow-400 rounded-full w-4 h-4 text-center me-2"></div>
+                                    @else
+                                        <div class="bg-red-700 rounded-full w-4 h-4 text-center me-2"></div>
+                                    @endif
+                                    <p class="">{{ $k->customer->id_customer }}</p>
+                                </div>
+                                <p class="">{{ $k->pesan }}</p>
                             </div>
-                            <div>
-                                <span class="text-sm"><i class="far fa-long-arrow-down"></i></span>
-                                <span class="text-sm font-light text-gray-500">20°C</span>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="flex flex-row justify-between mt-6">
-                        <div class="flex flex-col items-center">
-                            <div class="font-medium text-sm">Wind</div>
-                            <div class="text-sm text-gray-500">9k/h</div>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div class="font-medium text-sm">Humidity</div>
-                            <div class="text-sm text-gray-500">68%</div>
-                        </div>
-                        <div class="flex flex-col items-center">
-                            <div class="font-medium text-sm">Visibility</div>
-                            <div class="text-sm text-gray-500">10km</div>
-                        </div>
-                    </div>
-                </div>
+                @endif
             </div>
         </div>
     </main>

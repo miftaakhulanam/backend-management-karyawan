@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Task::class);
     }
 
+    public function komplain()
+    {
+        return $this->hasMany(Komplain::class);
+    }
+
     public function absensi()
     {
         return $this->hasMany(Absensi::class);
