@@ -2,6 +2,8 @@
 
 @section('container')
     <main class="flex h-screen justify-center items-center overflow-x-hidden overflow-y-auto p-10 bg-gray-200">
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa, ea esse. Sapiente ad ab distinctio quidem, qui
+            cupiditate hic consequatur laboriosam! Ullam beatae accusantium pariatur sequi nihil, blanditiis error at.</p>
         <section class="flex justify-center items-center">
             <div class="relative">
                 <div class="bg-[#96C3ED] w-[100px] h-[100px] rounded-full absolute top-9"></div>
