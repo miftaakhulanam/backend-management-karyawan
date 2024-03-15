@@ -12,7 +12,7 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: 103.143.171.237
-        username: indotech_pdm
-        password: IndoTech_Community
+        username: ${{ secrets.username }}
+        password: ${{ secrets.password }}
         protocol: ftps
         port: 21 # todo replace with your web hosts ftps port
