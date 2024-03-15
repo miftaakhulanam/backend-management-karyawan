@@ -13,7 +13,7 @@
                     </div>
                     <form action="/login" method="POST" class="flex flex-col gap-3 w-full mt-9">
                         @csrf
-                        <div class="mx-auto">
+                        <div class="flex items-center justify-center">
                             <label for="username" class="text-black/50"></label>
                             <input type="text" name="name" placeholder="Username" id="username" autofocus required
                                 value="{{ old('name') }}" class="text-md ps-6 h-9 w-96 border-none rounded-md" />
