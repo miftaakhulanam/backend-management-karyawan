@@ -13,10 +13,10 @@
                     </div>
                     <form action="/login" method="POST" class="flex flex-col gap-3 w-full mt-9">
                         @csrf
-                        <div class="w-96 flex flex-col mx-auto">
+                        <div class="mx-auto">
                             <label for="username" class="text-black/50"></label>
                             <input type="text" name="name" placeholder="Username" id="username" autofocus required
-                                value="{{ old('name') }}" class="text-md ps-6 h-9 w-full border-none rounded-md" />
+                                value="{{ old('name') }}" class="text-md ps-6 h-9 w-96 border-none rounded-md" />
                             @error('name')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                             @enderror
