@@ -8,10 +8,5 @@
     "file": "assets/app-ZZU8-C7F.js",
     "src": "resources/js/app.js",
     "isEntry": true
-  },
-  "tailwind.config.js": {
-    "file": "assets/tailwind.config-gQgY7bOE.js",
-    "src": "tailwind.config.js",
-    "isEntry": true
   }
 }
