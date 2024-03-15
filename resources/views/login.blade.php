@@ -13,18 +13,17 @@
                     </div>
                     <form action="/login" method="POST" class="flex flex-col gap-3 w-full mt-9">
                         @csrf
-                        <div class="flex items-center justify-center">
+                        {{-- <div class="flex items-center justify-center">
                             <label for="username" class="text-black/50"></label>
+                        </div> --}}
+
+                        <div class="flex flex-col gap-3 items-center justify-center" x-data="{ show: true }">
                             <input type="text" name="name" placeholder="Username" id="username" autofocus required
-                                value="{{ old('name') }}" class="text-md ps-6 h-9 w-96 border-none rounded-md" />
+                                value="{{ old('name') }}" class="text-md ps-6 h-9 w-full border-none rounded-md" />
                             @error('name')
                                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
                             @enderror
-                        </div>
-
-                        <div class="flex items-center justify-center" x-data="{ show: true }">
-                            <span class="text-black/50"></span>
-                            <div class="relative w-96">
+                            <div class="relative w-full">
                                 <input placeholder="Password" id="password" name="password" required
                                     :type="show ? 'password' : 'text'"class="text-md ps-6 h-9 w-full border-none rounded-md" />
                                 <div class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5">
