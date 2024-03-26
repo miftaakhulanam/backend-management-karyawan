@@ -20,7 +20,7 @@
                     class="flex relative justify-center px-7 md:px-10 py-7 md:py-14 w-[300px] md:w-[430px] min-h-max backdrop-blur m-16 border border-[#515151] rounded-xl">
                     @if (auth()->user()->photo_profil)
                         <img class="absolute top-0 -translate-y-1/2 w-[70px] h-[70px] object-cover rounded-full border-[3px] border-gray-400/80"
-                            src="{{ asset('storage/' . auth()->user()->photo_profil) }}" alt="{{ auth()->user()->name }}">
+                            src="{{ url('storage/' . auth()->user()->photo_profil) }}" alt="{{ auth()->user()->name }}">
                     @else
                         <img class="absolute top-0 -translate-y-1/2 w-[70px] h-[70px] rounded-full border-[3px] border-gray-400/80"
                             src="{{ asset('img/profile.png') }}" alt="{{ auth()->user()->username }}">
