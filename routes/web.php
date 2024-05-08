@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StaffController;
@@ -68,3 +69,7 @@ Route::resource('/pengaturan/paket', PengaturanController::class)->parameters(['
 
 Route::get('/api/kecamatan-by-kota', [ApiController::class, 'kecamatanByKota']);
 Route::get('/api/desa-by-kecamatan', [ApiController::class, 'desaByKecamatan']);
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
