@@ -16,3 +16,5 @@ jobs:
         password: ${{ secrets.password }}
         protocol: ftps
         port: 21 # todo replace with your web hosts ftps port
+        log-level: verbose
+        timeout: 60000
