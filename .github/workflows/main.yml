@@ -14,7 +14,7 @@ jobs:
         server: 103.143.171.237
         username: ${{ secrets.username }}
         password: ${{ secrets.password }}
-        protocol: ftps
+        method: sftp
         port: 21 # todo replace with your web hosts ftps port
         log-level: verbose
         timeout: 60000
