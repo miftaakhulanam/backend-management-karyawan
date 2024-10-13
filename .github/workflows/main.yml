@@ -14,7 +14,3 @@ jobs:
           server: 103.143.171.237
           username: ${{ secrets.username }}
           password: ${{ secrets.password }}
-          protocol: ftp
-          security: "strict"
-          port: 21
-          timeout: 120000
