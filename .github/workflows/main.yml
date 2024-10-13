@@ -16,5 +16,3 @@ jobs:
         password: ${{ secrets.password }}
         protocol: ftps
         port: 21
-log-level: verbose
-timeout: 60000
