@@ -14,5 +14,4 @@ jobs:
           server: 103.143.171.237
           username: ${{ secrets.username }}
           password: ${{ secrets.password }}
-          protocol: ftps
           port: 21
