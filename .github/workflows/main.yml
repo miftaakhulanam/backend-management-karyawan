@@ -1,44 +1,18 @@
-name: 🚀 Deploy
-on:
-  push:
-    branches:
-      - main
+on: push
+name: 🚀 Deploy website on push
 jobs:
-  deploy:
-    name: 🚀 Deploy to CPanel
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get Latest Code
-        uses: actions/checkout@v4.1.2
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
 
-      - name: ⚙️ Use PHP 8.3
-        uses: shivammathur/setup-php@main
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          php-version: "8.3"
-
-      - name: ⚙️ Use NodeJS 20
-        uses: actions/setup-node@v4.0.2
-        with:
-          node-version: "20"
-
-      - name: 🔨 Install Dependencies PHP
-        run: composer install
-
-      - name: 🔨 Install Dependencies JS
-        run: npm install
-
-      - name: 🗄️ Copy .env
-        run: cp .env.example .env
-
-      - name: 🗑️ Delete Build Folder
-        run: rm -rf public/build && rm -rf bootstrap/ssr
-
-      - name: 🔨 Build Frontend (Inertia + React)
-        run: npm run build
-
-      - name: 🚀 Deploy to CPanel
-        env:
-          FTP_SERVER: 103.143.171.237
-          FTP_USERNAME: ${{ secrets.username }}
-          FTP_PASSWORD: ${{ secrets.password }}
-        run: npm run deploy
+          server: 103.143.171.237
+          username: ${{ secrets.username }}
+          password: ${{ secrets.password }}
+          protocol: "ftps"
+          port: 990
